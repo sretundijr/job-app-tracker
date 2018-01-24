@@ -11,27 +11,30 @@ const renderTableHead = (list) => {
   return `
     <tr>
       ${tableHeaders}
+      <th>Notes</th>
     </tr>
   `;
 };
 
 const renderTableData = (list) => {
-  let tableData;
-  list.forEach((item) => {
-    tableData = item.map((obj) => {
+  const tableData = list.map((item, index) => {
+    const data = item.map((obj) => {
       return (
         `
         <td>${Object.values(obj)}</td>
       `
       );
     }).join('');
-  });
-
-  return `
-    <tr>
-      ${tableData}
-    </tr>
-  `;
+    return (
+      `
+      <tr>
+        ${data}
+        <td><button id="note-${index}">Notes</button></td>
+      </tr>
+    `
+    );
+  }).join('');
+  return tableData;
 };
 
 

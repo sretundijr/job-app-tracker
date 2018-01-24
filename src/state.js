@@ -10,6 +10,10 @@ class ManageAppState {
     // this.addJobApp = this.addJobApp.bind(this);
   }
 
+  getJobApp(index) {
+    return this.state.jobApps[index];
+  }
+
   getJobApps() {
     return this.state.jobApps;
   }
