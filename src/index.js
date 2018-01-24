@@ -1,19 +1,18 @@
 
 /* global document */
 
-const { renderTableHead } = require('./job-app-table');
+const { renderTableHead, renderTableData } = require('./job-app-table');
 
 const ManageAppState = require('./state');
 
 const State = new ManageAppState();
 
-const returnElement = (id) => {
-  return document.getElementById(id);
-};
+const returnElement = id => document.getElementById(id);
 
-const renderTable = () => {
+const renderTable = (state) => {
   const tableElement = returnElement('job-app-table');
-  tableElement.innerHTML = renderTableHead(State.getJobApps()[0]);
+  tableElement.innerHTML =
+    renderTableHead(state.getJobApps()[0]) + renderTableData(state.getJobApps());
 };
 
 const addApplicationFormSubmit = () => {
@@ -26,10 +25,13 @@ const addApplicationFormSubmit = () => {
       };
     });
 
+    // the input type submit also gets stored here, remove with pop
+    // todo revisit this
+    formObjArray.pop();
     State.addJobApp(formObjArray);
 
     // put here for now
-    renderTable();
+    renderTable(State);
   });
 };
 

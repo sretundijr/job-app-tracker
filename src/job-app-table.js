@@ -1,6 +1,5 @@
 
 const renderTableHead = (list) => {
-  console.log(list);
   const tableHeaders = list.map((item) => {
     return (
       `
@@ -16,4 +15,24 @@ const renderTableHead = (list) => {
   `;
 };
 
-module.exports = { renderTableHead };
+const renderTableData = (list) => {
+  let tableData;
+  list.forEach((item) => {
+    tableData = item.map((obj) => {
+      return (
+        `
+        <td>${Object.values(obj)}</td>
+      `
+      );
+    }).join('');
+  });
+
+  return `
+    <tr>
+      ${tableData}
+    </tr>
+  `;
+};
+
+
+module.exports = { renderTableHead, renderTableData };
