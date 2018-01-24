@@ -6,14 +6,14 @@ const renderTableHead = (list) => {
       `
         <th>${Object.keys(item)}</th>
       `
-    )
+    );
   }).join('');
 
   return `
     <tr>
       ${tableHeaders}
     </tr>
-  `
-}
+  `;
+};
 
 module.exports = { renderTableHead };

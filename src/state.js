@@ -7,7 +7,7 @@ class ManageAppState {
     };
 
     // saved for later so I don't have to look it up, just incase
-    // this.addJobApp = this.addJobApp.bind(this);  
+    // this.addJobApp = this.addJobApp.bind(this);
   }
 
   getJobApps() {
