@@ -22,16 +22,14 @@ const addApplicationFormSubmit = () => {
   const formElement = returnElement('app-form');
   formElement.addEventListener('submit', (e) => {
     e.preventDefault();
-    const formObjArray = Array.from(e.target).map((item) => {
-      return {
-        [item.name]: item.value,
-      };
+    let formObj = {};
+    Array.from(e.target).forEach((item) => {
+      if (item.name !== '') {
+        formObj = Object.assign({}, formObj, { [item.name]: item.value });
+      }
     });
 
-    // the input type submit also gets stored here, remove with pop
-    // todo revisit this
-    formObjArray.pop();
-    State.addJobApp(formObjArray);
+    State.addJobApp(formObj);
 
     console.log(State);
 

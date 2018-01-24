@@ -1,9 +1,9 @@
 
-const renderTableHead = (list) => {
-  const tableHeaders = list.map((item) => {
+const renderTableHead = (obj) => {
+  const tableHeaders = Object.keys(obj).map((item) => {
     return (
       `
-        <th>${Object.keys(item)}</th>
+        <th>${item}</th>
       `
     );
   }).join('');
@@ -17,18 +17,19 @@ const renderTableHead = (list) => {
 };
 
 const renderTableData = (list) => {
+  console.log(list);
   const tableData = list.map((item, index) => {
-    const data = item.map((obj) => {
+    const tableRow = Object.values(item).map((value) => {
       return (
         `
-        <td>${Object.values(obj)}</td>
-      `
+          <td>${value}</td>
+        `
       );
     }).join('');
     return (
       `
       <tr>
-        ${data}
+        ${tableRow}
         <td><button id="note-${index}">Notes</button></td>
       </tr>
     `
@@ -36,6 +37,5 @@ const renderTableData = (list) => {
   }).join('');
   return tableData;
 };
-
 
 module.exports = { renderTableHead, renderTableData };
