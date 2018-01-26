@@ -7,6 +7,7 @@ class ManageAppState {
     };
 
     this.addOrEditNote = this.addOrEditNote.bind(this);
+    this.removeNote = this.removeNote.bind(this);
   }
 
   getJobAppNote(index) {
@@ -15,6 +16,12 @@ class ManageAppState {
 
   addOrEditNote(index, valueObj) {
     this.state.jobApps[index] = Object.assign({}, this.state.jobApps[index], valueObj);
+  }
+
+  removeNote(index) {
+    if (this.state.jobApps[index].notes) {
+      this.state.jobApps[index].notes = '';
+    }
   }
 
   getJobAppsWithoutNotes() {

@@ -3,7 +3,7 @@
 
 const { renderTableHead, renderTableData } = require('./job-app-table');
 
-const { renderTextArea, addNoteEvent } = require('./add-note');
+const { renderTextArea, addNoteEvent, removeNote } = require('./add-note');
 
 const ManageAppState = require('./state');
 
@@ -45,11 +45,13 @@ const addNoteHandler = () => {
     index = e.target.id.substring(e.target.id.indexOf('-') + 1);
     const notes = State.getJobAppNote(parseInt(index, 10));
     if (notes) {
-      noteElement.innerHTML = renderTextArea(notes);
+      noteElement.innerHTML = renderTextArea(notes, index);
       addNoteEvent(State.addOrEditNote, index);
+      removeNote(State.removeNote, index);
     } else {
-      noteElement.innerHTML = renderTextArea('');
+      noteElement.innerHTML = renderTextArea('', index);
       addNoteEvent(State.addOrEditNote, index);
+      removeNote(State.removeNote, index);
     }
   });
 
