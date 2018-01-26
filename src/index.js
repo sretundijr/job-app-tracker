@@ -47,25 +47,26 @@ const noteEvents = (index) => {
   const notes = State.getJobAppNote(parseInt(index, 10));
   if (notes) {
     noteElement.innerHTML = renderTextArea(notes, index);
-    addNoteEvent(State.addOrEditNote, index);
-    removeNote(State.removeNote, index);
   } else {
     noteElement.innerHTML = renderTextArea('', index);
-    addNoteEvent(State.addOrEditNote, index);
-    removeNote(State.removeNote, index);
   }
+  addNoteEvent(State.addOrEditNote, index);
+  removeNote(State.removeNote, index);
 };
 
-const addNoteHandler = () => {
+const addTableHandler = () => {
   const element = returnElement('job-app-table', 'id');
 
   element.addEventListener('click', (e) => {
     const index = returnIndex(e.target.id);
     if (e.target.value === 'notes') {
+      // State.noteVisible = true;
       noteEvents(index);
-    } else {
+    } else if (!State.noteVisible) {
       State.removeJobApp(index);
       renderTable(State);
+    } else {
+      alert('Please finish adding or removing a note before deleting an item');
     }
   });
 };
@@ -84,6 +85,6 @@ const renderContactTypeSelection = () => {
 document.addEventListener('DOMContentLoaded', () => {
   renderContactTypeSelection();
   addApplicationFormSubmit();
-  addNoteHandler();
+  addTableHandler();
 });
 

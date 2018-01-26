@@ -9,10 +9,12 @@ class ManageAppState {
         'in-person',
         'email',
       ],
+      noteVisible: false,
     };
 
     this.addOrEditNote = this.addOrEditNote.bind(this);
     this.removeNote = this.removeNote.bind(this);
+    // this.noteVisible = this.noteVisible.bind(this);
   }
 
   getContactType() {
