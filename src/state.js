@@ -52,6 +52,10 @@ class ManageAppState {
   addJobApp(application) {
     this.state.jobApps.push(application);
   }
+
+  removeJobApp(index) {
+    this.state.jobApps.splice(index, 1);
+  }
 }
 
 module.exports = ManageAppState;

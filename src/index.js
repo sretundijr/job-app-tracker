@@ -14,8 +14,14 @@ const State = new ManageAppState();
 // todo move this to job app table file
 const renderTable = (state) => {
   const tableElement = returnElement('job-app-table', 'id');
-  tableElement.innerHTML =
-    renderTableHead(state.getJobAppsWithoutNotes()[0]) + renderTableData(state.getJobAppsWithoutNotes());
+  const appsWithoutNotes = state.getJobAppsWithoutNotes();
+  if (appsWithoutNotes.length > 0) {
+    tableElement.innerHTML =
+      renderTableHead(appsWithoutNotes[0]) +
+      renderTableData(appsWithoutNotes);
+  } else {
+    tableElement.innerHTML = '';
+  }
 };
 
 const addApplicationFormSubmit = () => {
@@ -36,30 +42,36 @@ const addApplicationFormSubmit = () => {
   });
 };
 
+const noteEvents = (index) => {
+  const noteElement = returnElement('job-app-note', 'id');
+  const notes = State.getJobAppNote(parseInt(index, 10));
+  if (notes) {
+    noteElement.innerHTML = renderTextArea(notes, index);
+    addNoteEvent(State.addOrEditNote, index);
+    removeNote(State.removeNote, index);
+  } else {
+    noteElement.innerHTML = renderTextArea('', index);
+    addNoteEvent(State.addOrEditNote, index);
+    removeNote(State.removeNote, index);
+  }
+};
+
 const addNoteHandler = () => {
   const element = returnElement('job-app-table', 'id');
 
   element.addEventListener('click', (e) => {
-    const noteElement = returnElement('job-app-note', 'id');
     const index = returnIndex(e.target.id);
-    const notes = State.getJobAppNote(parseInt(index, 10));
-    if (notes) {
-      noteElement.innerHTML = renderTextArea(notes, index);
-      addNoteEvent(State.addOrEditNote, index);
-      removeNote(State.removeNote, index);
+    if (e.target.value === 'notes') {
+      noteEvents(index);
     } else {
-      noteElement.innerHTML = renderTextArea('', index);
-      addNoteEvent(State.addOrEditNote, index);
-      removeNote(State.removeNote, index);
+      State.removeJobApp(index);
+      renderTable(State);
     }
   });
-
-  console.log(State);
 };
 
 const renderContactTypeSelection = () => {
   const selectElementContainer = returnElement('contact-type', 'id');
-  console.log(selectElementContainer);
   selectElementContainer.innerHTML = State.getContactType().map((item) => {
     return (
       `

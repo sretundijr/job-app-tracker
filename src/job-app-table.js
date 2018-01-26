@@ -12,6 +12,7 @@ const renderTableHead = (obj) => {
     <tr>
       ${tableHeaders}
       <th>Notes</th>
+      <th>Delete</th>
     </tr>
   `;
 };
@@ -29,7 +30,8 @@ const renderTableData = (list) => {
       `
       <tr>
         ${tableRow}
-        <td><button id="note-${index}">Notes</button></td>
+        <td><button value="notes" id="note-${index}">Notes</button></td>
+        <td><button value="remove" id="note-${index}">Remove</button></td> 
       </tr>
     `
     );
