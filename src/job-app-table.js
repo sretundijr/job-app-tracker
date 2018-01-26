@@ -17,7 +17,6 @@ const renderTableHead = (obj) => {
 };
 
 const renderTableData = (list) => {
-  console.log(list);
   const tableData = list.map((item, index) => {
     const tableRow = Object.values(item).map((value) => {
       return (

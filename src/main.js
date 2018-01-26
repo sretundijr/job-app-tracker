@@ -11,3 +11,5 @@ require('./job-app-table');
 require('./add-note');
 
 require('./add-note');
+
+require('./helpers');

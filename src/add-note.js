@@ -1,11 +1,13 @@
 
 /* global document */
 
+const { returnElement } = require('./helpers');
+
 const renderTextArea = (note, index) => {
   return (
     `
   <div id="app-notes-container">
-    <textarea id="note-content-${index}">${note}</textarea>
+    <textarea id="noteContent-${index}">${note}</textarea>
     <div>
       <button id="save-note">
         Save
@@ -20,24 +22,22 @@ const renderTextArea = (note, index) => {
 };
 
 const addNoteEvent = (callback, index) => {
-  const addNoteElement = document.getElementById('save-note');
-  const noteContentElement = document.getElementById(`note-content-${index}`);
+  const addNoteElement = returnElement('save-note', 'id');
+  const noteContentElement = returnElement(`noteContent-${index}`, 'id');
   addNoteElement.addEventListener('click', () => {
     const note = {
       notes: noteContentElement.value,
     };
     callback(index, note);
-    document.getElementById('job-app-note').innerHTML = '';
+    returnElement('job-app-note', 'id').innerHTML = '';
   });
 };
 
 const removeNote = (callback, index) => {
   const noteElement = document.getElementById('remove-note');
-  console.log('here');
   noteElement.addEventListener('click', () => {
-    console.log('here 2');
     callback(index);
-    document.getElementById('job-app-note').innerHTML = '';
+    returnElement('job-app-note', 'id').innerHTML = '';
   });
 };
 

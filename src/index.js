@@ -5,21 +5,21 @@ const { renderTableHead, renderTableData } = require('./job-app-table');
 
 const { renderTextArea, addNoteEvent, removeNote } = require('./add-note');
 
+const { returnElement, returnIndex } = require('./helpers');
+
 const ManageAppState = require('./state');
 
 const State = new ManageAppState();
 
-const returnElement = id => document.getElementById(id);
-
 // todo move this to job app table file
 const renderTable = (state) => {
-  const tableElement = returnElement('job-app-table');
+  const tableElement = returnElement('job-app-table', 'id');
   tableElement.innerHTML =
     renderTableHead(state.getJobAppsWithoutNotes()[0]) + renderTableData(state.getJobAppsWithoutNotes());
 };
 
 const addApplicationFormSubmit = () => {
-  const formElement = returnElement('app-form');
+  const formElement = returnElement('app-form', 'id');
   formElement.addEventListener('submit', (e) => {
     e.preventDefault();
     let formObj = {};
@@ -37,12 +37,11 @@ const addApplicationFormSubmit = () => {
 };
 
 const addNoteHandler = () => {
-  const element = returnElement('job-app-table');
-  let index = '';
+  const element = returnElement('job-app-table', 'id');
 
   element.addEventListener('click', (e) => {
-    const noteElement = returnElement('job-app-note');
-    index = e.target.id.substring(e.target.id.indexOf('-') + 1);
+    const noteElement = returnElement('job-app-note', 'id');
+    const index = returnIndex(e.target.id);
     const notes = State.getJobAppNote(parseInt(index, 10));
     if (notes) {
       noteElement.innerHTML = renderTextArea(notes, index);
