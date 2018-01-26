@@ -3,7 +3,7 @@
 
 const { renderTableHead, renderTableData } = require('./job-app-table');
 
-const { renderTextArea } = require('./add-note');
+const { renderTextArea, addNoteEvent } = require('./add-note');
 
 const ManageAppState = require('./state');
 
@@ -15,7 +15,7 @@ const returnElement = id => document.getElementById(id);
 const renderTable = (state) => {
   const tableElement = returnElement('job-app-table');
   tableElement.innerHTML =
-    renderTableHead(state.getJobApps()[0]) + renderTableData(state.getJobApps());
+    renderTableHead(state.getJobAppsWithoutNotes()[0]) + renderTableData(state.getJobAppsWithoutNotes());
 };
 
 const addApplicationFormSubmit = () => {
@@ -31,21 +31,29 @@ const addApplicationFormSubmit = () => {
 
     State.addJobApp(formObj);
 
-    console.log(State);
-
-    // put here for now
     renderTable(State);
+    formObj.notes = '';
   });
 };
 
 const addNoteHandler = () => {
   const element = returnElement('job-app-table');
+  let index = '';
 
   element.addEventListener('click', (e) => {
     const noteElement = returnElement('job-app-note');
-    const index = e.target.id.substring(e.target.id.indexOf('-') + 1);
-    noteElement.innerHTML = renderTextArea();
+    index = e.target.id.substring(e.target.id.indexOf('-') + 1);
+    const notes = State.getJobAppNote(parseInt(index, 10));
+    if (notes) {
+      noteElement.innerHTML = renderTextArea(notes);
+      addNoteEvent(State.addOrEditNote, index);
+    } else {
+      noteElement.innerHTML = renderTextArea('');
+      addNoteEvent(State.addOrEditNote, index);
+    }
   });
+
+  console.log(State);
 };
 
 document.addEventListener('DOMContentLoaded', () => {

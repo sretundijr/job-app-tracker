@@ -6,8 +6,23 @@ class ManageAppState {
       jobApps: [],
     };
 
-    // saved for later so I don't have to look it up, just incase
-    // this.addJobApp = this.addJobApp.bind(this);
+    this.addOrEditNote = this.addOrEditNote.bind(this);
+  }
+
+  getJobAppNote(index) {
+    return this.state.jobApps[index].notes;
+  }
+
+  addOrEditNote(index, valueObj) {
+    this.state.jobApps[index] = Object.assign({}, this.state.jobApps[index], valueObj);
+  }
+
+  getJobAppsWithoutNotes() {
+    return this.state.jobApps.map((item) => {
+      const clone = Object.assign({}, item);
+      delete clone.notes;
+      return clone;
+    });
   }
 
   getJobApp(index) {
