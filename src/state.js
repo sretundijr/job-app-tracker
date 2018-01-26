@@ -4,10 +4,19 @@ class ManageAppState {
     this.state = {
       // this array contains an array of objects [[{}],[{}]]
       jobApps: [],
+      'contact-type': [
+        'online-application',
+        'in-person',
+        'email',
+      ],
     };
 
     this.addOrEditNote = this.addOrEditNote.bind(this);
     this.removeNote = this.removeNote.bind(this);
+  }
+
+  getContactType() {
+    return this.state['contact-type'];
   }
 
   getJobAppNote(index) {

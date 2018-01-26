@@ -57,7 +57,20 @@ const addNoteHandler = () => {
   console.log(State);
 };
 
+const renderContactTypeSelection = () => {
+  const selectElementContainer = returnElement('contact-type', 'id');
+  console.log(selectElementContainer);
+  selectElementContainer.innerHTML = State.getContactType().map((item) => {
+    return (
+      `
+      <option value="${item}">${item}</option>
+      `
+    );
+  }).join('');
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+  renderContactTypeSelection();
   addApplicationFormSubmit();
   addNoteHandler();
 });

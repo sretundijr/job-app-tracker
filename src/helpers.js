@@ -9,4 +9,5 @@ const returnElement = (name, type) => {
 };
 
 const returnIndex = idString => idString.substring(idString.indexOf('-') + 1);
+
 module.exports = { returnElement, returnIndex };
