@@ -21,7 +21,11 @@ const renderTextArea = (note, index) => {
   );
 };
 
-const addNoteEvent = (callback, index) => {
+const removeNoteTextArea = () => {
+  returnElement('job-app-note', 'id').innerHTML = '';
+};
+
+const addNoteEvent = (callback, toggleNote, index) => {
   const addNoteElement = returnElement('save-note', 'id');
   const noteContentElement = returnElement(`noteContent-${index}`, 'id');
   addNoteElement.addEventListener('click', () => {
@@ -29,16 +33,23 @@ const addNoteEvent = (callback, index) => {
       notes: noteContentElement.value,
     };
     callback(index, note);
-    returnElement('job-app-note', 'id').innerHTML = '';
+    toggleNote();
+    removeNoteTextArea();
   });
 };
 
-const removeNote = (callback, index) => {
+const removeNote = (callback, toggleNote, index) => {
   const noteElement = document.getElementById('remove-note');
   noteElement.addEventListener('click', () => {
     callback(index);
-    returnElement('job-app-note', 'id').innerHTML = '';
+    toggleNote();
+    removeNoteTextArea();
   });
 };
 
-module.exports = { renderTextArea, addNoteEvent, removeNote };
+module.exports = {
+  renderTextArea,
+  addNoteEvent,
+  removeNote,
+  removeNoteTextArea,
+};

@@ -3,7 +3,11 @@
 
 const { renderTableHead, renderTableData } = require('./job-app-table');
 
-const { renderTextArea, addNoteEvent, removeNote } = require('./add-note');
+const { renderTextArea,
+  addNoteEvent,
+  removeNote,
+  removeNoteTextArea,
+} = require('./add-note');
 
 const { returnElement, returnIndex } = require('./helpers');
 
@@ -45,24 +49,27 @@ const addApplicationFormSubmit = () => {
 const noteEvents = (index) => {
   const noteElement = returnElement('job-app-note', 'id');
   const notes = State.getJobAppNote(parseInt(index, 10));
-  if (notes) {
+  State.toggleNoteVisible();
+  if (!State.getNoteStatus()) {
+    removeNoteTextArea();
+  } else if (notes) {
     noteElement.innerHTML = renderTextArea(notes, index);
   } else {
     noteElement.innerHTML = renderTextArea('', index);
   }
-  addNoteEvent(State.addOrEditNote, index);
-  removeNote(State.removeNote, index);
+  addNoteEvent(State.addOrEditNote, State.toggleNoteVisible, index);
+  removeNote(State.removeNote, State.toggleNoteVisible, index);
 };
 
+// todo make the toggle work
 const addTableHandler = () => {
   const element = returnElement('job-app-table', 'id');
 
   element.addEventListener('click', (e) => {
     const index = returnIndex(e.target.id);
     if (e.target.value === 'notes') {
-      // State.noteVisible = true;
       noteEvents(index);
-    } else if (!State.noteVisible) {
+    } else if (!State.getNoteStatus()) {
       State.removeJobApp(index);
       renderTable(State);
     } else {

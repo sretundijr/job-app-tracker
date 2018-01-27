@@ -14,7 +14,15 @@ class ManageAppState {
 
     this.addOrEditNote = this.addOrEditNote.bind(this);
     this.removeNote = this.removeNote.bind(this);
-    // this.noteVisible = this.noteVisible.bind(this);
+    this.toggleNoteVisible = this.toggleNoteVisible.bind(this);
+  }
+
+  getNoteStatus() {
+    return this.state.noteVisible;
+  }
+
+  toggleNoteVisible() {
+    this.state.noteVisible = !this.state.noteVisible;
   }
 
   getContactType() {
