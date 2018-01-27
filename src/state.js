@@ -2,7 +2,6 @@
 class ManageAppState {
   constructor() {
     this.state = {
-      // this array contains an array of objects [[{}],[{}]]
       jobApps: [],
       'contact-type': [
         'online-application',

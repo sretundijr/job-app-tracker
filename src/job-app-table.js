@@ -1,9 +1,12 @@
 
+const { capitalizeFirstLetterOfEachWord } = require('./helpers');
+
 const renderTableHead = (obj) => {
   const tableHeaders = Object.keys(obj).map((item) => {
+    const tableHeader = capitalizeFirstLetterOfEachWord(item);
     return (
       `
-        <th>${item}</th>
+        <th>${tableHeader}</th>
       `
     );
   }).join('');

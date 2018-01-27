@@ -3,7 +3,8 @@
 
 const { renderTableHead, renderTableData } = require('./job-app-table');
 
-const { renderTextArea,
+const {
+  renderTextArea,
   addNoteEvent,
   removeNote,
   removeNoteTextArea,
@@ -61,7 +62,6 @@ const noteEvents = (index) => {
   removeNote(State.removeNote, State.toggleNoteVisible, index);
 };
 
-// todo make the toggle work
 const addTableHandler = () => {
   const element = returnElement('job-app-table', 'id');
 
