@@ -10,12 +10,12 @@ const returnElement = (name, type) => {
 
 const returnIndex = idString => parseInt(idString.substring(idString.indexOf('-') + 1), 10);
 
-const removeHypen = (tableHeading) => {
+const removeHyphen = (tableHeading) => {
   return tableHeading.replace(/-/g, ' ');
 };
 
 const capitalizeFirstLetterOfEachWord = (tableHeading) => {
-  return removeHypen(tableHeading).replace(/\w\S*/g, (txt) => {
+  return tableHeading.replace(/\w\S*/g, (txt) => {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 };
@@ -23,5 +23,6 @@ const capitalizeFirstLetterOfEachWord = (tableHeading) => {
 module.exports = {
   returnElement,
   returnIndex,
+  removeHyphen,
   capitalizeFirstLetterOfEachWord,
 };

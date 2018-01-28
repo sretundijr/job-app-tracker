@@ -1,11 +1,11 @@
 
-const { capitalizeFirstLetterOfEachWord } = require('./helpers');
+const { removeHyphen, capitalizeFirstLetterOfEachWord } = require('./helpers');
 
 const { renderTypeSelection } = require('./list-selection');
 
 const renderTableHead = (obj) => {
   const tableHeaders = Object.keys(obj).map((item) => {
-    const tableHeader = capitalizeFirstLetterOfEachWord(item);
+    const tableHeader = capitalizeFirstLetterOfEachWord(removeHyphen(item));
     return (
       `
         <th>${tableHeader}</th>

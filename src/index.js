@@ -46,8 +46,9 @@ const addApplicationFormSubmit = () => {
 
     State.addJobApp(formObj);
 
+    formElement.reset();
+
     renderTable(State);
-    formObj.notes = '';
   });
 };
 
