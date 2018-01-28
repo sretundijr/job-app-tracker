@@ -62,8 +62,10 @@ const noteEvents = (index) => {
   } else {
     noteElement.innerHTML = renderTextArea('', index);
   }
-  addNoteEvent(State.addOrEditNote, State.toggleNoteVisible, index);
-  removeNote(State.removeNote, State.toggleNoteVisible, index);
+  if (State.getNoteStatus()) {
+    addNoteEvent(State.addOrEditNote, State.toggleNoteVisible, index);
+    removeNote(State.removeNote, State.toggleNoteVisible, index);
+  }
 };
 
 const addTableHandler = () => {
@@ -82,10 +84,10 @@ const addTableHandler = () => {
       );
     } else if (e.target.value === 'notes') {
       noteEvents(index);
-    } else if (!State.getNoteStatus()) {
+    } else if (!State.getNoteStatus() && e.target.value === 'remove') {
       State.removeJobApp(index);
       renderTable(State);
-    } else {
+    } else if (State.getNoteStatus()) {
       alert('Please finish adding or removing a note before deleting an item');
     }
   });
