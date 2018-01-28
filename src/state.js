@@ -3,17 +3,41 @@ class ManageAppState {
   constructor() {
     this.state = {
       jobApps: [],
-      'contact-type': [
+      contactType: [
         'online-application',
         'in-person',
         'email',
       ],
+      applicationStatus: [
+        'select one',
+        'discovered',
+        'applied',
+        'phone screen',
+        'interview',
+        'offer',
+        'inactive',
+        'rejected',
+      ],
       noteVisible: false,
+      appStatusChange: false,
     };
 
     this.addOrEditNote = this.addOrEditNote.bind(this);
     this.removeNote = this.removeNote.bind(this);
     this.toggleNoteVisible = this.toggleNoteVisible.bind(this);
+    this.addOrEditApplicationStatus = this.addOrEditApplicationStatus.bind(this);
+  }
+
+  addOrEditApplicationStatus(index, value) {
+    console.log(index);
+    const appStatus = {
+      status: value,
+    };
+    this.state.jobApps[index] = Object.assign({}, this.state.jobApps[index], appStatus);
+  }
+
+  getApplicationStatus() {
+    return this.state.applicationStatus;
   }
 
   getNoteStatus() {
@@ -25,7 +49,7 @@ class ManageAppState {
   }
 
   getContactType() {
-    return this.state['contact-type'];
+    return this.state.contactType;
   }
 
   getJobAppNote(index) {

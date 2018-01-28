@@ -3,6 +3,8 @@
 
 const { renderTableHead, renderTableData } = require('./job-app-table');
 
+const { renderTypeSelection, handleSelectEvent } = require('./list-selection');
+
 const {
   renderTextArea,
   addNoteEvent,
@@ -18,12 +20,14 @@ const State = new ManageAppState();
 
 // todo move this to job app table file
 const renderTable = (state) => {
+  console.log(State.getJobApps());
+
   const tableElement = returnElement('job-app-table', 'id');
   const appsWithoutNotes = state.getJobAppsWithoutNotes();
   if (appsWithoutNotes.length > 0) {
     tableElement.innerHTML =
       renderTableHead(appsWithoutNotes[0]) +
-      renderTableData(appsWithoutNotes);
+      renderTableData(appsWithoutNotes, state.getApplicationStatus());
   } else {
     tableElement.innerHTML = '';
   }
@@ -49,7 +53,7 @@ const addApplicationFormSubmit = () => {
 
 const noteEvents = (index) => {
   const noteElement = returnElement('job-app-note', 'id');
-  const notes = State.getJobAppNote(parseInt(index, 10));
+  const notes = State.getJobAppNote(index);
   State.toggleNoteVisible();
   if (!State.getNoteStatus()) {
     removeNoteTextArea();
@@ -67,7 +71,16 @@ const addTableHandler = () => {
 
   element.addEventListener('click', (e) => {
     const index = returnIndex(e.target.id);
-    if (e.target.value === 'notes') {
+
+    if (e.target.name === 'app-status') {
+      handleSelectEvent(
+        e.target.id,
+        'id',
+        State.addOrEditApplicationStatus,
+        index,
+        () => { renderTable(State); },
+      );
+    } else if (e.target.value === 'notes') {
       noteEvents(index);
     } else if (!State.getNoteStatus()) {
       State.removeJobApp(index);
@@ -78,19 +91,19 @@ const addTableHandler = () => {
   });
 };
 
-const renderContactTypeSelection = () => {
-  const selectElementContainer = returnElement('contact-type', 'id');
-  selectElementContainer.innerHTML = State.getContactType().map((item) => {
-    return (
-      `
-      <option value="${item}">${item}</option>
-      `
-    );
-  }).join('');
+const contactTypeContainer = () => {
+  returnElement('contact-type', 'id').innerHTML =
+    renderTypeSelection(State.getContactType());
+};
+
+const applicationStatusContainer = () => {
+  returnElement('app-status', 'id').innerHTML =
+    renderTypeSelection(State.getApplicationStatus());
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderContactTypeSelection();
+  contactTypeContainer();
+  applicationStatusContainer();
   addApplicationFormSubmit();
   addTableHandler();
 });

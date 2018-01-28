@@ -1,6 +1,8 @@
 
 const { capitalizeFirstLetterOfEachWord } = require('./helpers');
 
+const { renderTypeSelection } = require('./list-selection');
+
 const renderTableHead = (obj) => {
   const tableHeaders = Object.keys(obj).map((item) => {
     const tableHeader = capitalizeFirstLetterOfEachWord(item);
@@ -14,13 +16,14 @@ const renderTableHead = (obj) => {
   return `
     <tr>
       ${tableHeaders}
+      <th>Application Stage</th>      
       <th>Notes</th>
       <th>Delete</th>
     </tr>
   `;
 };
 
-const renderTableData = (list) => {
+const renderTableData = (list, selectList) => {
   const tableData = list.map((item, index) => {
     const tableRow = Object.values(item).map((value) => {
       return (
@@ -33,6 +36,11 @@ const renderTableData = (list) => {
       `
       <tr>
         ${tableRow}
+        <td>
+          <select name="app-status" id="appStatus-${index}">
+            ${renderTypeSelection(selectList)}
+          </select>
+        </td>
         <td><button value="notes" id="note-${index}">Notes</button></td>
         <td><button value="remove" id="note-${index}">Remove</button></td> 
       </tr>

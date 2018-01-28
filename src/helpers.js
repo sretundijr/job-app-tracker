@@ -8,7 +8,7 @@ const returnElement = (name, type) => {
   return '';
 };
 
-const returnIndex = idString => idString.substring(idString.indexOf('-') + 1);
+const returnIndex = idString => parseInt(idString.substring(idString.indexOf('-') + 1), 10);
 
 const removeHypen = (tableHeading) => {
   return tableHeading.replace(/-/g, ' ');
@@ -20,4 +20,8 @@ const capitalizeFirstLetterOfEachWord = (tableHeading) => {
   });
 };
 
-module.exports = { returnElement, returnIndex, capitalizeFirstLetterOfEachWord };
+module.exports = {
+  returnElement,
+  returnIndex,
+  capitalizeFirstLetterOfEachWord,
+};
