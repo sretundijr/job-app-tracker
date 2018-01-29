@@ -1,5 +1,5 @@
 {
-  "name": "webpack-tutorial",
+  "name": "job-app-tracker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "mocha",
     "start": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --watch",
-    "watch:server": "node server.js"
+    "watch:server": "node src/server.js"
   },
   "author": "",
   "license": "ISC",

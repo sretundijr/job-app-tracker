@@ -1,20 +1,20 @@
-var path = require("path");
+const path = require('path');
 
-var DIST_DIR = path.join(__dirname, "dist"),
-	CLIENT_DIR = path.join(__dirname, "src");
+const DIST_DIR = path.join(__dirname, 'dist');
+const CLIENT_DIR = path.join(__dirname, 'src');
 
 module.exports = {
-	context: CLIENT_DIR,
+  context: CLIENT_DIR,
 
-	entry: "./main",
+  entry: './main',
 
-	output: {
-		path: DIST_DIR,
-		filename: "bundle.js",
-	},
-	devtool: 'source-map',
+  output: {
+    path: DIST_DIR,
+    filename: 'bundle.js',
+  },
+  devtool: 'source-map',
 
-	resolve: {
-		extensions: ['.js', '.jsx'],
-	},
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
