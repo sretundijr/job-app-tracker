@@ -2,16 +2,16 @@ require("file-loader?name=index.html!./index.html");
 
 require('./validation');
 
-require('./index.js');
+require('./client/index.js');
 
-require('./state');
+require('./client/state');
 
-require('./job-app-table');
+require('./client/job-app-table');
 
-require('./add-note');
+require('./client/add-note');
 
-require('./add-note');
+require('./client/add-note');
 
-require('./helpers');
+require('./client/helpers');
 
-require('./list-selection');
+require('./client/list-selection');
