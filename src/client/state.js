@@ -4,13 +4,13 @@ class ManageAppState {
     this.state = {
       jobApps: [],
       contactType: [
-        'select one',
+        '',
         'online-application',
         'in-person',
         'email',
       ],
       applicationStatus: [
-        'select one',
+        '',
         'discovered',
         'applied',
         'phone screen',
