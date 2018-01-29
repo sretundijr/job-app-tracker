@@ -18,10 +18,7 @@ const ManageAppState = require('./state');
 
 const State = new ManageAppState();
 
-// todo move this to job app table file
 const renderTable = (state) => {
-  console.log(State.getJobApps());
-
   const tableElement = returnElement('job-app-table', 'id');
   const appsWithoutNotes = state.getJobAppsWithoutNotes();
   if (appsWithoutNotes.length > 0) {
@@ -52,6 +49,11 @@ const addApplicationFormSubmit = () => {
   });
 };
 
+const addAndRemoveNoteHandler = (index) => {
+  addNoteEvent(State.addOrEditNote, State.toggleNoteVisible, index);
+  removeNote(State.removeNote, State.toggleNoteVisible, index);
+};
+
 const noteEvents = (index) => {
   const noteElement = returnElement('job-app-note', 'id');
   const notes = State.getJobAppNote(index);
@@ -60,12 +62,10 @@ const noteEvents = (index) => {
     removeNoteTextArea();
   } else if (notes) {
     noteElement.innerHTML = renderTextArea(notes, index);
+    addAndRemoveNoteHandler(index);
   } else {
     noteElement.innerHTML = renderTextArea('', index);
-  }
-  if (State.getNoteStatus()) {
-    addNoteEvent(State.addOrEditNote, State.toggleNoteVisible, index);
-    removeNote(State.removeNote, State.toggleNoteVisible, index);
+    addAndRemoveNoteHandler(index);
   }
 };
 

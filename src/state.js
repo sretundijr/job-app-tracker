@@ -20,7 +20,6 @@ class ManageAppState {
         'rejected',
       ],
       noteVisible: false,
-      appStatusChange: false,
     };
 
     this.addOrEditNote = this.addOrEditNote.bind(this);
@@ -30,7 +29,6 @@ class ManageAppState {
   }
 
   addOrEditApplicationStatus(index, value) {
-    console.log(index);
     const appStatus = {
       status: value,
     };
