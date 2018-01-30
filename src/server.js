@@ -5,9 +5,11 @@ const DIST_DIR = path.join(__dirname, '../dist');
 const PORT = 8080;
 const app = express();
 
-let webpack = require('webpack');
-let webpackConfig = require('../webpack.config');
-let compiler = webpack(webpackConfig);
+const webpack = require('webpack');
+
+const webpackConfig = require('../webpack.config');
+
+const compiler = webpack(webpackConfig);
 
 app.use(require("webpack-dev-middleware")(compiler, {
   noInfo: true, publicPath: webpackConfig.output.publicPath

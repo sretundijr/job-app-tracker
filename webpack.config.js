@@ -17,6 +17,17 @@ module.exports = {
     path: DIST_DIR,
     filename: 'bundle.js',
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
+      },
+    ],
+  },
   plugins: [
     // OccurenceOrderPlugin is needed for webpack 1.x only
     new webpack.optimize.OccurrenceOrderPlugin(),
