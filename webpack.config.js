@@ -21,24 +21,12 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: {
-              hmr: true,
-            },
-          },
-          { loader: 'css-loader' },
-        ],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   plugins: [
-    // OccurenceOrderPlugin is needed for webpack 1.x only
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // Use NoErrorsPlugin for webpack 1.x
-    new webpack.NoEmitOnErrorsPlugin(),
   ],
   devtool: 'source-map',
 

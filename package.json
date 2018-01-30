@@ -7,6 +7,7 @@
     "fix": "webpack --display-error-details",
     "test": "mocha",
     "start": "npm-run-all --parallel watch:server watch:build",
+    "start-server": "node src/server.js",
     "watch:build": "webpack --watch",
     "watch:server": "node src/server.js"
   },
@@ -27,7 +28,7 @@
     "file-loader": "^0.11.2",
     "mocha": "^3.4.2",
     "style-loader": "^0.20.1",
-    "webpack": "^2.6.0",
+    "webpack": "^3.0.0",
     "webpack-hot-middleware": "^2.21.0"
   }
 }
