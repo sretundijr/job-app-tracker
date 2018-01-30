@@ -16,8 +16,8 @@ const renderTableHead = (obj) => {
   return `
     <tr>
       ${tableHeaders}
-      <th>Application Stage</th>      
-      <th>Notes</th>
+      <th>Change Status</th>    
+      <th>Notes/Actions/Research</th>
       <th>Delete</th>
     </tr>
   `;
