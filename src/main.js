@@ -15,3 +15,7 @@ require('./client/add-note');
 require('./client/helpers');
 
 require('./client/list-selection');
+
+require('file-loader?name=index.css!./client/styles/index.css');
+
+// "file-loader?name=house-stats.css!./styles/house-stats.css"

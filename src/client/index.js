@@ -1,6 +1,8 @@
 
 /* global document */
 
+require('./styles/index.css');
+
 const { renderTableHead, renderTableData } = require('./job-app-table');
 
 const { renderTypeSelection, handleSelectEvent } = require('./list-selection');
